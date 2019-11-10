@@ -1,0 +1,19 @@
+.header-menu__container {
+  padding: 0 32px;
+  line-height: 64px;
+  vertical-align: middle;
+
+  .hambuger-icon {
+    vertical-align: middle;
+    font-size: 25px;
+    color: white;
+  }
+
+  .app-name {
+    margin: 0 1rem;
+    display: inline;
+    vertical-align: middle;
+    font-weight: 300;
+    color: white;
+  }
+}

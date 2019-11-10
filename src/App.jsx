@@ -12,6 +12,7 @@ import StoreContext from '@utils/core/storeContext';
 import './App.scss';
 
 // import local components
+import Routers from '@components/Routers';
 
 const initialState = {};
 const store = configureStore(initialState, history);
@@ -22,7 +23,9 @@ class App extends PureComponent {
       <div id="App">
         <Provider store={store}>
           <StoreContext.Provider value={store}>
-            <ConnectedRouter history={history} />
+            <ConnectedRouter history={history}>
+              <Routers />
+            </ConnectedRouter>
           </StoreContext.Provider>
         </Provider>
       </div>
