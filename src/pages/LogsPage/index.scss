@@ -1,0 +1,10 @@
+@import '@themes/themeMixins.scss';
+
+.logs-page__container {
+  @include contentLayout();
+
+  .logs-page-title {
+    font-size: 40px;
+    font-weight: 300;
+  }
+}
