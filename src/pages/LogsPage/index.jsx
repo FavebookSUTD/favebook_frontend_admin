@@ -25,6 +25,7 @@ import {
 
 // import local components
 import LogsFilter from './components/LogsFilter';
+import LogsTable from './components/LogsTable';
 
 // import local styling
 import './index.scss';
@@ -61,12 +62,15 @@ class LogsPage extends PureComponent {
         {error ? (
           <Result status="500" title="Something went wrong in the server." />
         ) : (
-          <LogsFilter
-            loading={loading}
-            log={logs}
-            total={totalLogsCount}
-            fetchNextHandler={this.fetchNextHandler}
-          />
+          <>
+            <LogsFilter />
+            <LogsTable
+              loading={loading}
+              logs={logs}
+              total={totalLogsCount}
+              fetchNextHandler={this.fetchNextHandler}
+            />
+          </>
         )}
       </Content>
     );

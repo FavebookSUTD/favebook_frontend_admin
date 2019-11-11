@@ -1,6 +1,8 @@
 @import '@themes/themeVariables.scss';
 
 .logs-filter__container {
+  margin-bottom: 0.5rem;
+
   .logs-filter__search-container.ant-input-group-wrapper {
     width: 50%;
     border: 8px solid $primary-background-color;
