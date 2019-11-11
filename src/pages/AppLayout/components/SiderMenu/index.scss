@@ -1,24 +1,22 @@
 @import '@themes/themeVariables.scss';
 
 .sider-menu__container {
-  .sider-menu__content {
-    background-image: linear-gradient(to bottom, $secondary-color, $primary-color);
+  background-image: linear-gradient(to bottom, $secondary-color, $primary-color);
 
-    .sider-menu {
-      background: transparent;
+  .sider-menu {
+    background: transparent;
 
-      .menu-icon {
-        font-size: 20px;
-      }
+    .menu-icon {
+      font-size: 20px;
+    }
 
-      .ant-menu-item {
-        font-family: sans-serif;
-        font-size: 18px;
-      }
+    .ant-menu-item {
+      font-family: sans-serif;
+      font-size: 18px;
+    }
 
-      .ant-menu-item-selected {
-        background: rgba(0, 0, 0, 0.3);
-      }
+    .ant-menu-item-selected {
+      background: rgba(0, 0, 0, 0.3);
     }
   }
 }

@@ -34,8 +34,10 @@ class AppLayout extends PureComponent {
     return (
       <Layout className="app-layout__container">
         <HeaderMenu siderOpenState={siderOpenState} toggleSiderHandler={toggleSiderOpenState} />
-        <SiderMenu siderOpenState={siderOpenState} toggleSiderHandler={toggleSiderOpenState} />
-        <Routers />
+        <Layout className="app-layout__content" hasSider>
+          <SiderMenu siderOpenState={siderOpenState} toggleSiderHandler={toggleSiderOpenState} />
+          <Routers />
+        </Layout>
       </Layout>
     );
   }
