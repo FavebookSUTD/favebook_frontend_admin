@@ -2,6 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// import lodash
+import replace from 'lodash/replace';
+
 // import utils
 import { goto } from '@utils/goto';
 
@@ -14,7 +17,7 @@ import { Layout, Menu, Icon } from 'antd';
 // Extract antd components
 const { Sider } = Layout;
 
-const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
+const SiderMenu = ({ path, siderOpenState, toggleSiderHandler }) => {
   return (
     <Sider
       className="sider-menu__container"
@@ -33,7 +36,7 @@ const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
         className="sider-menu"
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={['logs']}
+        selectedKeys={[replace(path, '/', '') || 'logs']}
         onClick={({ key }) => goto(key)}
       >
         <Menu.Item className="sider-menu-item" key="logs">
@@ -50,6 +53,7 @@ const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
 };
 
 SiderMenu.propTypes = {
+  path: PropTypes.string.isRequired,
   siderOpenState: PropTypes.bool.isRequired,
   toggleSiderHandler: PropTypes.func.isRequired,
 };
