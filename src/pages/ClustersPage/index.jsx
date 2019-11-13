@@ -18,6 +18,7 @@ import {} from './actions';
 import {} from './selectors';
 
 // import local components
+import ClusterController from './components/ClusterController';
 
 // import local styling
 import './index.scss';
@@ -36,6 +37,7 @@ class ClustersPage extends PureComponent {
     return (
       <Content className="logs-page__container">
         <Title className="logs-page-title">Clusters</Title>
+        <ClusterController />
       </Content>
     );
   }
