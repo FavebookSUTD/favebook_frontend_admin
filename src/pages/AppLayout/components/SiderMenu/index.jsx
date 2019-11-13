@@ -2,6 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// import utils
+import { goto } from '@utils/goto';
+
 // import local styling
 import './index.scss';
 
@@ -26,7 +29,13 @@ const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
         }
       }}
     >
-      <Menu className="sider-menu" theme="dark" mode="inline" defaultSelectedKeys={['logs']}>
+      <Menu
+        className="sider-menu"
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={['logs']}
+        onClick={({ key }) => goto(key)}
+      >
         <Menu.Item key="logs">
           <Icon className="menu-icon" type="bars" />
           <span>Logs</span>

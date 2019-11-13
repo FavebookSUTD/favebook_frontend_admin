@@ -58,7 +58,7 @@ class LogsPage extends PureComponent {
 
     return (
       <Content className="logs-page__container">
-        <Title className="logs-page-title">Clusters</Title>
+        <Title className="logs-page-title">Logs</Title>
         {error ? (
           <Result status="500" title="Something went wrong in the server." />
         ) : (

@@ -1,0 +1,11 @@
+@import '@themes/themeMixins.scss';
+
+.clusters-page__container {
+  @include contentLayout();
+  overflow: hidden;
+
+  .clusters-page-title {
+    font-size: 40px;
+    font-weight: 300;
+  }
+}
