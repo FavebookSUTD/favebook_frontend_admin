@@ -1,12 +1,9 @@
 // import React
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-
-// import local components
-import size from 'lodash/size';
 
 // import lodash
+import size from 'lodash/size';
 
 // import local styling
 import './index.scss';
@@ -14,9 +11,8 @@ import './index.scss';
 // import Antd
 import { Table } from 'antd';
 
-// Extract antd components
-
 const LogsTable = ({ loading, logs, total, fetchNextHandler }) => {
+  // Define the column title
   const columns = [
     {
       title: 'Session ID',
@@ -67,7 +63,18 @@ const LogsTable = ({ loading, logs, total, fetchNextHandler }) => {
 
 LogsTable.propTypes = {
   loading: PropTypes.bool.isRequired,
-  logs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  logs: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      session_id: PropTypes.string,
+      user_id: PropTypes.string,
+      ip: PropTypes.string,
+      request_type: PropTypes.string,
+      end_point: PropTypes.string,
+      time: PropTypes.string,
+      status: PropTypes.string,
+    }),
+  ).isRequired,
   total: PropTypes.number.isRequired,
   fetchNextHandler: PropTypes.func.isRequired,
 };
