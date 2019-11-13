@@ -21,24 +21,29 @@ const LogsTable = ({ loading, logs, total, fetchNextHandler }) => {
     {
       title: 'Session ID',
       dataIndex: 'session_id',
+      className: 'logs-table-column',
     },
     {
       title: 'User ID',
       dataIndex: 'user_id',
+      className: 'logs-table-column',
     },
     {
       title: 'Timestamp',
       dataIndex: 'time',
+      className: 'logs-table-column',
     },
     {
       title: 'Endpoint',
       dataIndex: 'end_point',
+      className: 'logs-table-column',
     },
   ];
 
   return (
     <div className="logs-table__container">
       <Table
+        className="logs-table"
         columns={columns}
         dataSource={logs}
         rowKey={record => record._id}
