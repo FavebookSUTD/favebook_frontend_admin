@@ -46,6 +46,7 @@ const LogsTable = ({ loading, logs, total, fetchNextHandler }) => {
         className="logs-table"
         columns={columns}
         dataSource={logs}
+        loading={loading}
         rowKey={record => record._id}
         pagination={{
           position: 'top',
