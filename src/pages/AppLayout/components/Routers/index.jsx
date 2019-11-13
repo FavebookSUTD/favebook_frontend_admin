@@ -9,11 +9,25 @@ import { compose } from 'redux';
 // import actions
 
 // import page component
+import LogsPage from '@pages/LogsPage';
 
 const Routers = ({ history }) => {
   return (
     <Switch>
-      <RouterGuard config={[]} history={history} />
+      <RouterGuard
+        config={[
+          {
+            path: '/',
+            exact: true,
+            component: LogsPage,
+          },
+          {
+            path: '/*',
+            redirect: '/',
+          },
+        ]}
+        history={history}
+      />
     </Switch>
   );
 };

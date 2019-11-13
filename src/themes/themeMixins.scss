@@ -45,3 +45,7 @@
     background: transparent;
   }
 }
+
+@mixin contentLayout() {
+  padding: 2.5rem;
+}
