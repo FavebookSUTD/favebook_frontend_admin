@@ -36,11 +36,11 @@ const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
         defaultSelectedKeys={['logs']}
         onClick={({ key }) => goto(key)}
       >
-        <Menu.Item key="logs">
+        <Menu.Item className="sider-menu-item" key="logs">
           <Icon className="menu-icon" type="bars" />
           <span>Logs</span>
         </Menu.Item>
-        <Menu.Item key="clusters">
+        <Menu.Item className="sider-menu-item" key="clusters">
           <Icon className="menu-icon" type="cluster" />
           <span>Clusters</span>
         </Menu.Item>
