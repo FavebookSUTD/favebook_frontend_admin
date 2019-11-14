@@ -21,6 +21,7 @@ const TableDisplay = ({
   pageSize,
   fetchNextHandler,
   infiniteScroll,
+  pagination,
 }) => {
   // Define the column title
   const columns = map(titles, title => {
@@ -30,9 +31,8 @@ const TableDisplay = ({
   });
 
   // Define the pagination setting
-  const paginationSetttings = infiniteScroll
-    ? false
-    : {
+  const paginationSetttings = pagination
+    ? {
         position: 'top',
         hideOnSinglePage: true,
         total,
@@ -43,7 +43,8 @@ const TableDisplay = ({
             fetchNextHandler();
           }
         },
-      };
+      }
+    : false;
 
   const scrollSettings = infiniteScroll ? { y: true } : false;
 
@@ -75,12 +76,14 @@ TableDisplay.propTypes = {
   pageSize: PropTypes.number,
   fetchNextHandler: PropTypes.func,
   infiniteScroll: PropTypes.bool,
+  pagination: PropTypes.bool,
 };
 
 TableDisplay.defaultProps = {
   pageSize: 8,
   fetchNextHandler: () => {},
   infiniteScroll: false,
+  pagination: true,
 };
 
 export default TableDisplay;

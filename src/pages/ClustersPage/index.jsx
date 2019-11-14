@@ -81,6 +81,7 @@ class ClustersPage extends PureComponent {
           titles={tableTitles}
           total={totalClusterNum}
           infiniteScroll
+          pagination={false}
         />
       </Content>
     );

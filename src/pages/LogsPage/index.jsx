@@ -88,7 +88,9 @@ class LogsPage extends PureComponent {
               data={logs}
               titles={this.columns}
               total={totalLogsCount}
+              pageSize={10}
               fetchNextHandler={this.fetchNextHandler}
+              infiniteScroll
             />
           </>
         )}
