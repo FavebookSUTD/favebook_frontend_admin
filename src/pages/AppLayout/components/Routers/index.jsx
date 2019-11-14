@@ -10,6 +10,7 @@ import { compose } from 'redux';
 
 // import page component
 import LogsPage from '@pages/LogsPage';
+import ClusterPage from '@pages/ClustersPage';
 
 const Routers = ({ history }) => {
   return (
@@ -20,6 +21,16 @@ const Routers = ({ history }) => {
             path: '/',
             exact: true,
             component: LogsPage,
+          },
+          {
+            path: '/logs',
+            exact: true,
+            component: LogsPage,
+          },
+          {
+            path: '/clusters',
+            exact: true,
+            component: ClusterPage,
           },
           {
             path: '/*',

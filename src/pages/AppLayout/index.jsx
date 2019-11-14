@@ -1,6 +1,7 @@
 // import React
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -30,12 +31,21 @@ import { Layout } from 'antd';
 
 class AppLayout extends PureComponent {
   render() {
-    const { siderOpenState, toggleSiderOpenState } = this.props;
+    const {
+      location: { pathname },
+      siderOpenState,
+      toggleSiderOpenState,
+    } = this.props;
+
     return (
       <Layout className="app-layout__container">
         <HeaderMenu siderOpenState={siderOpenState} toggleSiderHandler={toggleSiderOpenState} />
         <Layout className="app-layout__content" hasSider>
-          <SiderMenu siderOpenState={siderOpenState} toggleSiderHandler={toggleSiderOpenState} />
+          <SiderMenu
+            path={pathname}
+            siderOpenState={siderOpenState}
+            toggleSiderHandler={toggleSiderOpenState}
+          />
           <Routers />
         </Layout>
       </Layout>
@@ -44,6 +54,7 @@ class AppLayout extends PureComponent {
 }
 
 AppLayout.propTypes = {
+  location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
   siderOpenState: PropTypes.bool.isRequired,
   toggleSiderOpenState: PropTypes.func.isRequired,
 };
@@ -65,6 +76,7 @@ const withConnect = connect(
 );
 
 export default compose(
+  withRouter,
   withReducer,
   withSaga,
   withConnect,

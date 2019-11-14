@@ -2,6 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// import lodash
+import replace from 'lodash/replace';
+
+// import utils
+import { goto } from '@utils/goto';
+
 // import local styling
 import './index.scss';
 
@@ -11,7 +17,7 @@ import { Layout, Menu, Icon } from 'antd';
 // Extract antd components
 const { Sider } = Layout;
 
-const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
+const SiderMenu = ({ path, siderOpenState, toggleSiderHandler }) => {
   return (
     <Sider
       className="sider-menu__container"
@@ -26,12 +32,18 @@ const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
         }
       }}
     >
-      <Menu className="sider-menu" theme="dark" mode="inline" defaultSelectedKeys={['logs']}>
-        <Menu.Item key="logs">
+      <Menu
+        className="sider-menu"
+        theme="dark"
+        mode="inline"
+        selectedKeys={[replace(path, '/', '') || 'logs']}
+        onClick={({ key }) => goto(key)}
+      >
+        <Menu.Item className="sider-menu-item" key="logs">
           <Icon className="menu-icon" type="bars" />
           <span>Logs</span>
         </Menu.Item>
-        <Menu.Item key="clusters">
+        <Menu.Item className="sider-menu-item" key="clusters">
           <Icon className="menu-icon" type="cluster" />
           <span>Clusters</span>
         </Menu.Item>
@@ -41,6 +53,7 @@ const SiderMenu = ({ siderOpenState, toggleSiderHandler }) => {
 };
 
 SiderMenu.propTypes = {
+  path: PropTypes.string.isRequired,
   siderOpenState: PropTypes.bool.isRequired,
   toggleSiderHandler: PropTypes.func.isRequired,
 };

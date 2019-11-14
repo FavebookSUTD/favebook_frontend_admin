@@ -1,13 +1,13 @@
 @import '@themes/themeMixins.scss';
 
-.logs-page__container {
+.clusters-page__container {
   @include contentLayout();
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
-  .logs-page-title {
+  .clusters-page-title {
     font-size: 40px;
     font-weight: 300;
   }

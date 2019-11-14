@@ -25,7 +25,7 @@ import {
 
 // import local components
 import LogsFilter from './components/LogsFilter';
-import LogsTable from './components/LogsTable';
+import TableDisplay from '@components/TableDisplay';
 
 // import local styling
 import './index.scss';
@@ -39,6 +39,25 @@ const { Title } = Typography;
 
 class LogsPage extends PureComponent {
   PAGE_SIZE = 100;
+
+  columns = [
+    {
+      title: 'Session ID',
+      dataIndex: 'session_id',
+    },
+    {
+      title: 'User ID',
+      dataIndex: 'user_id',
+    },
+    {
+      title: 'Timestamp',
+      dataIndex: 'time',
+    },
+    {
+      title: 'Endpoint',
+      dataIndex: 'end_point',
+    },
+  ];
 
   componentDidMount() {
     const { fetchInitLogs } = this.props;
@@ -58,17 +77,20 @@ class LogsPage extends PureComponent {
 
     return (
       <Content className="logs-page__container">
-        <Title className="logs-page-title">Clusters</Title>
+        <Title className="logs-page-title">Logs</Title>
         {error ? (
           <Result status="500" title="Something went wrong in the server." />
         ) : (
           <>
             <LogsFilter />
-            <LogsTable
+            <TableDisplay
               loading={loading}
-              logs={logs}
+              data={logs}
+              titles={this.columns}
               total={totalLogsCount}
+              pageSize={10}
               fetchNextHandler={this.fetchNextHandler}
+              infiniteScroll
             />
           </>
         )}
