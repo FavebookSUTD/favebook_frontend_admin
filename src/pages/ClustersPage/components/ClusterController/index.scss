@@ -1,6 +1,8 @@
 @import '@themes/themeVariables.scss';
 
 .cluster-controller__container {
+  margin-bottom: 1.5rem;
+
   .cluster-controller-title {
     color: $primary-color;
     font-weight: 500;

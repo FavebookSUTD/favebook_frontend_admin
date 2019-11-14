@@ -1,10 +1,9 @@
 // import React
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-// import local components
-
 // import lodash
+import isEqual from 'lodash/isEqual';
 
 // import local styling
 import './index.scss';
@@ -16,7 +15,15 @@ import { Typography, Select, Button } from 'antd';
 const { Title } = Typography;
 const { Option } = Select;
 
-const ClusterController = () => {
+const ClusterController = ({ loading, clusterCount, updateHandler }) => {
+  const [selectValue, setSelectValue] = useState(clusterCount);
+
+  useEffect(() => {
+    if (isEqual(selectValue, 0)) {
+      setSelectValue(clusterCount);
+    }
+  });
+
   return (
     <div className="cluster-controller__container">
       <Title className="cluster-controller-title" level={4}>
@@ -26,7 +33,9 @@ const ClusterController = () => {
         <Select
           className="cluster-controller__select"
           dropdownClassName="cluster-controller__select-option"
-          defaultValue={2}
+          loading={loading}
+          value={loading ? '' : selectValue}
+          onSelect={setSelectValue}
         >
           <Option value={2}>2</Option>
           <Option value={4}>4</Option>
@@ -34,7 +43,12 @@ const ClusterController = () => {
           <Option value={8}>8</Option>
           <Option value={16}>16</Option>
         </Select>
-        <Button className="spark-btn" type="primary" shape="round">
+        <Button
+          className="spark-btn"
+          type="primary"
+          shape="round"
+          onClick={() => updateHandler(selectValue)}
+        >
           Run Spark Job
         </Button>
       </div>
@@ -42,6 +56,10 @@ const ClusterController = () => {
   );
 };
 
-ClusterController.propTypes = {};
+ClusterController.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  clusterCount: PropTypes.number.isRequired,
+  updateHandler: PropTypes.func.isRequired,
+};
 
 export default ClusterController;

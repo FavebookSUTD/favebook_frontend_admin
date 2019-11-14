@@ -12,13 +12,14 @@ import injectReducer from '@utils/core/injectReducer';
 import injectSaga from '@utils/core/injectSaga';
 
 // import actions
-import {} from './actions';
+import { fetchClusterStats, updateCluster } from './actions';
 
 // import selector
-import {} from './selectors';
+import { selectLoading, selectError, selectClusters, selectTotalClusterNum } from './selectors';
 
 // import local components
 import ClusterController from './components/ClusterController';
+import TableDisplay from '@components/TableDisplay';
 
 // import local styling
 import './index.scss';
@@ -31,23 +32,82 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 class ClustersPage extends PureComponent {
-  componentDidMount() {}
+  componentDidMount() {
+    const { fetchClusterStats } = this.props;
+    fetchClusterStats();
+  }
+
+  updateClusterHandler = clusterNum => {
+    const { updateCluster } = this.props;
+    updateCluster(clusterNum);
+  };
 
   render() {
+    const { loading, clusters, totalClusterNum } = this.props;
+    const tableTitles = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+      },
+      {
+        title: 'Address',
+        dataIndex: 'ip',
+      },
+      {
+        title: 'Status',
+        dataIndex: 'status',
+      },
+      {
+        title: 'Cores',
+        dataIndex: 'core',
+      },
+      {
+        title: 'Memory',
+        dataIndex: 'memory',
+      },
+    ];
+
     return (
-      <Content className="logs-page__container">
-        <Title className="logs-page-title">Clusters</Title>
-        <ClusterController />
+      <Content className="clusters-page__container">
+        <Title className="clusters-page-title">Clusters</Title>
+        <ClusterController
+          loading={loading}
+          clusterCount={totalClusterNum}
+          updateHandler={this.updateClusterHandler}
+        />
+        <TableDisplay
+          loading={loading}
+          data={clusters}
+          titles={tableTitles}
+          total={totalClusterNum}
+          infiniteScroll
+        />
       </Content>
     );
   }
 }
 
-ClustersPage.propTypes = {};
+ClustersPage.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+  clusters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  totalClusterNum: PropTypes.number.isRequired,
 
-const mapStateToProps = createStructuredSelector({});
+  fetchClusterStats: PropTypes.func.isRequired,
+  updateCluster: PropTypes.func.isRequired,
+};
 
-const mapDispatchToProps = {};
+const mapStateToProps = createStructuredSelector({
+  loading: selectLoading,
+  error: selectError,
+  clusters: selectClusters,
+  totalClusterNum: selectTotalClusterNum,
+});
+
+const mapDispatchToProps = {
+  fetchClusterStats,
+  updateCluster,
+};
 
 const withReducer = injectReducer({ key: 'ClustersPage', reducer });
 const withSaga = injectSaga({ key: 'ClustersPage', saga });

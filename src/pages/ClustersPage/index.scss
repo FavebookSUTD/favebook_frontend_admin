@@ -3,6 +3,9 @@
 .clusters-page__container {
   @include contentLayout();
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
   .clusters-page-title {
     font-size: 40px;
