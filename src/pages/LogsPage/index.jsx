@@ -41,22 +41,12 @@ class LogsPage extends PureComponent {
   PAGE_SIZE = 100;
 
   columns = [
-    {
-      title: 'Session ID',
-      dataIndex: 'session_id',
-    },
-    {
-      title: 'User ID',
-      dataIndex: 'user_id',
-    },
-    {
-      title: 'Timestamp',
-      dataIndex: 'time',
-    },
-    {
-      title: 'Endpoint',
-      dataIndex: 'end_point',
-    },
+    { title: 'Session ID', dataIndex: 'session_id' },
+    { title: 'User ID', dataIndex: 'user_id' },
+    { title: 'Timestamp', dataIndex: 'time' },
+    { title: 'Request Type', dataIndex: 'request_type' },
+    { title: 'Endpoint', dataIndex: 'end_point' },
+    { title: 'Status Code', dataIndex: 'status' },
   ];
 
   componentDidMount() {
@@ -88,7 +78,7 @@ class LogsPage extends PureComponent {
               data={logs}
               titles={this.columns}
               total={totalLogsCount}
-              pageSize={10}
+              pageSize={Math.round(this.PAGE_SIZE / 2)}
               fetchNextHandler={this.fetchNextHandler}
               infiniteScroll
             />
