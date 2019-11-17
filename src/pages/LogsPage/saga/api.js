@@ -2,18 +2,22 @@ import api from '@apis/api';
 import apiConfig from '@apis/apiConfig';
 
 export function fetchLogs({ payload }) {
-  const { data } = require('./mock/mockLogsData.json');
+  const { sessionID, pageNum, pageSize } = payload;
 
-  const { pageNum, pageSize } = payload;
-  return new Promise(resolve => setTimeout(() => resolve({ data, pageNum }), 1000));
+  const query = {
+    'pg-num': pageNum,
+    'pg-size': pageSize,
+  };
 
-  // return api
-  //   .get({
-  //     url: apiConfig.logs,
-  //     query: {
-  //       'pg-num': pageNum,
-  //       'pg-size': pageSize,
-  //     },
-  //   })
-  //   .then(({ data }) => ({ data, pageNum }));
+  if (sessionID) {
+    query.session_id = sessionID;
+  }
+
+  return api
+    .get({
+      url: apiConfig.logs,
+      query,
+      needAuthenticate: true,
+    })
+    .then(({ data }) => ({ data, pageNum, query: sessionID || '' }));
 }

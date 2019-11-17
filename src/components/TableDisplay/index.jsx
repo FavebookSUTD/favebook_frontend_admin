@@ -80,7 +80,7 @@ TableDisplay.propTypes = {
 };
 
 TableDisplay.defaultProps = {
-  pageSize: 8,
+  pageSize: 10,
   fetchNextHandler: () => {},
   infiniteScroll: false,
   pagination: true,
