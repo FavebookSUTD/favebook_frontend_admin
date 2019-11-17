@@ -11,6 +11,7 @@ export function fetchLogs({ payload }) {
 
   if (sessionID) {
     query.session_id = sessionID;
+    query.filter = 'session_id';
   }
 
   return api
