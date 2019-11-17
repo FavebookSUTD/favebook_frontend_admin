@@ -1,0 +1,70 @@
+@import '@themes/themeMixins.scss';
+@import '@themes/themeVariables.scss';
+
+@mixin bannerStyling() {
+  height: 250px;
+  min-width: calc(400px + 4rem);
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 1px $primary-border-color;
+  border-width: 1px 0 1px 0;
+
+  & > * {
+    color: $primary-background-color;
+  }
+}
+
+.authenticate-page__main-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-image: linear-gradient(to bottom, $secondary-color, $primary-color);
+
+  .authenticate-page__content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .app-name__container {
+      @include bannerStyling();
+
+      .app-name {
+        margin: 0 2rem;
+        text-align: center;
+        font-size: 80px;
+        font-weight: 400;
+      }
+    }
+
+    .authenticate-page__form-container {
+      @include card();
+      @include boxShadow(0.15);
+      width: 400px;
+      min-width: 400px;
+      background: $secondary-background-color;
+    }
+
+    .motivation-slogan__container {
+      @include bannerStyling();
+
+      & > * {
+        font-size: 16px;
+        margin: 0 6rem;
+      }
+
+      .motivation-slogan {
+        text-align: right;
+        font-weight: 500;
+      }
+
+      .author {
+        display: block;
+        text-align: right;
+      }
+    }
+  }
+}

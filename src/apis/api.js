@@ -1,10 +1,20 @@
 import axios from 'axios';
 import queryString from 'querystring';
+import { generateUUID } from '@utils/generateUUID';
 
 const buildHeader = headers => {
+  // Get session ID
+  let clientId = window.sessionStorage.getItem('clientId');
+
+  if (!clientId) {
+    clientId = generateUUID();
+    window.sessionStorage.setItem('clientId', clientId);
+  }
+
   return {
     Accept: 'application/json, text/html',
     'Content-Type': 'application/json',
+    'X-Client-ID': clientId,
     ...headers,
   };
 };
@@ -13,7 +23,7 @@ const request = (props, method) => {
   const { url, needAuthenticate, headers, query, body } = props;
 
   const strQuery = queryString.stringify(query);
-  const apiURL = `${url}?${strQuery}`;
+  const apiURL = `${url}${strQuery ? `?${strQuery}` : ''}`;
 
   const configureJWT = headers => {
     if (needAuthenticate) {

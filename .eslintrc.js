@@ -42,7 +42,7 @@ module.exports = {
     'no-return-assign': [1],
     'no-param-reassign': [1],
     'no-shadow': [0],
-    camelcase: [1],
+    camelcase: [0],
     'no-underscore-dangle': [0, 'always'],
     'react/jsx-wrap-multilines': [2, { declaration: false, assignment: false }],
   },

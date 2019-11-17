@@ -13,10 +13,10 @@ import injectReducer from '@utils/core/injectReducer';
 import injectSaga from '@utils/core/injectSaga';
 
 // import actions
-import { toggleSiderOpenState } from './actions';
+import { toggleSiderOpenState, loginFromStorage } from './actions';
 
 // import selector
-import { selectSiderOpenState } from './selectors';
+import { selectSiderOpenState, selectUserInfo } from './selectors';
 
 // import local components
 import HeaderMenu from './components/HeaderMenu';
@@ -30,6 +30,11 @@ import './index.scss';
 import { Layout } from 'antd';
 
 class AppLayout extends PureComponent {
+  componentDidMount() {
+    const { loginFromStorage } = this.props;
+    loginFromStorage();
+  }
+
   render() {
     const {
       location: { pathname },
@@ -56,15 +61,23 @@ class AppLayout extends PureComponent {
 AppLayout.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
   siderOpenState: PropTypes.bool.isRequired,
+  userInfo: PropTypes.shape({
+    username: PropTypes.string,
+    access_token: PropTypes.string,
+  }).isRequired,
+
   toggleSiderOpenState: PropTypes.func.isRequired,
+  loginFromStorage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   siderOpenState: selectSiderOpenState,
+  userInfo: selectUserInfo,
 });
 
 const mapDispatchToProps = {
   toggleSiderOpenState,
+  loginFromStorage,
 };
 
 const withReducer = injectReducer({ key: 'AppLayout', reducer });
