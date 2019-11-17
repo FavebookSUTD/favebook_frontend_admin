@@ -2,10 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import local components
-
-// import lodash
-
 // import local styling
 import './index.scss';
 
@@ -15,7 +11,7 @@ import { Input } from 'antd';
 // Extract antd components
 const { Search } = Input;
 
-const LogsFilter = () => {
+const LogsFilter = ({ searchHandler, resetHandler }) => {
   return (
     <div className="logs-filter__container">
       <Search
@@ -23,12 +19,21 @@ const LogsFilter = () => {
         placeholder="Session ID"
         enterButton
         allowClear
-        onSearch={value => console.log(value)}
+        onSearch={value => {
+          if (value) {
+            searchHandler(value);
+          } else {
+            resetHandler();
+          }
+        }}
       />
     </div>
   );
 };
 
-LogsFilter.propTypes = {};
+LogsFilter.propTypes = {
+  searchHandler: PropTypes.func.isRequired,
+  resetHandler: PropTypes.func.isRequired,
+};
 
 export default LogsFilter;

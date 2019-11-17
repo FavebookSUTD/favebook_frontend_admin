@@ -12,13 +12,17 @@ import injectReducer from '@utils/core/injectReducer';
 import injectSaga from '@utils/core/injectSaga';
 
 // import actions
-import { fetchInitLogs, fetchNextLogs } from './actions';
+import { fetchInitLogs, fetchNextLogs, fetchSearchLogs, resetSearchLogs } from './actions';
 
 // import selector
 import {
   selectLogs,
   selectTotalLogsCount,
   selectCurrentLogsPageNum,
+  selectSearchQuery,
+  selectSearchLogs,
+  selectTotalSearchLogsCount,
+  selectCurrentSearchLogsPageNum,
   selectLoading,
   selectError,
 } from './selectors';
@@ -50,20 +54,50 @@ class LogsPage extends PureComponent {
   ];
 
   componentDidMount() {
-    const { fetchInitLogs } = this.props;
+    const { fetchInitLogs, resetSearchLogs } = this.props;
     fetchInitLogs(1, this.PAGE_SIZE);
+    resetSearchLogs();
   }
 
   fetchNextHandler = () => {
-    const { currentLogsPageNum, loading, fetchNextLogs } = this.props;
+    const {
+      currentLogsPageNum,
+      searchQuery,
+      currentSearchLogsPageNum,
+      loading,
+      fetchNextLogs,
+      fetchSearchLogs,
+    } = this.props;
 
     if (!loading) {
-      fetchNextLogs(currentLogsPageNum + 1, this.PAGE_SIZE);
+      if (searchQuery) {
+        fetchSearchLogs(searchQuery, currentSearchLogsPageNum + 1, this.PAGE_SIZE);
+      } else {
+        fetchNextLogs(currentLogsPageNum + 1, this.PAGE_SIZE);
+      }
     }
   };
 
+  searchLogsHandler = sessionId => {
+    const { fetchSearchLogs } = this.props;
+    fetchSearchLogs(sessionId, 1, this.PAGE_SIZE);
+  };
+
+  resetSearchHandler = () => {
+    const { resetSearchLogs } = this.props;
+    resetSearchLogs();
+  };
+
   render() {
-    const { logs, totalLogsCount, loading, error } = this.props;
+    const {
+      logs,
+      totalLogsCount,
+      searchQuery,
+      searchLogs,
+      totalSearchLogsCount,
+      loading,
+      error,
+    } = this.props;
 
     return (
       <Content className="logs-page__container">
@@ -72,12 +106,15 @@ class LogsPage extends PureComponent {
           <Result status="500" title="Something went wrong in the server." />
         ) : (
           <>
-            <LogsFilter />
+            <LogsFilter
+              searchHandler={this.searchLogsHandler}
+              resetHandler={this.resetSearchHandler}
+            />
             <TableDisplay
               loading={loading}
-              data={logs}
+              data={searchQuery ? searchLogs : logs}
               titles={this.columns}
-              total={totalLogsCount}
+              total={searchQuery ? totalSearchLogsCount : totalLogsCount}
               pageSize={Math.round(this.PAGE_SIZE / 2)}
               fetchNextHandler={this.fetchNextHandler}
               infiniteScroll
@@ -90,20 +127,48 @@ class LogsPage extends PureComponent {
 }
 
 LogsPage.propTypes = {
-  logs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  logs: PropTypes.arrayOf(
+    PropTypes.shape({
+      session_id: PropTypes.string,
+      user_id: PropTypes.string,
+      time: PropTypes.string,
+      request_type: PropTypes.string,
+      end_point: PropTypes.string,
+      status: PropTypes.string,
+    }),
+  ).isRequired,
   totalLogsCount: PropTypes.number.isRequired,
   currentLogsPageNum: PropTypes.number.isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  searchLogs: PropTypes.arrayOf(
+    PropTypes.shape({
+      session_id: PropTypes.string,
+      user_id: PropTypes.string,
+      time: PropTypes.string,
+      request_type: PropTypes.string,
+      end_point: PropTypes.string,
+      status: PropTypes.string,
+    }),
+  ).isRequired,
+  totalSearchLogsCount: PropTypes.number.isRequired,
+  currentSearchLogsPageNum: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
 
   fetchInitLogs: PropTypes.func.isRequired,
   fetchNextLogs: PropTypes.func.isRequired,
+  fetchSearchLogs: PropTypes.func.isRequired,
+  resetSearchLogs: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   logs: selectLogs,
   totalLogsCount: selectTotalLogsCount,
   currentLogsPageNum: selectCurrentLogsPageNum,
+  searchQuery: selectSearchQuery,
+  searchLogs: selectSearchLogs,
+  totalSearchLogsCount: selectTotalSearchLogsCount,
+  currentSearchLogsPageNum: selectCurrentSearchLogsPageNum,
   loading: selectLoading,
   error: selectError,
 });
@@ -111,6 +176,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   fetchInitLogs,
   fetchNextLogs,
+  fetchSearchLogs,
+  resetSearchLogs,
 };
 
 const withReducer = injectReducer({ key: 'LogsPage', reducer });

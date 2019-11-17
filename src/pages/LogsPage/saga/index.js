@@ -21,5 +21,12 @@ export default function* watchLogsPage() {
       ACTIONS.FETCH_NEXT_LOGS_FAILURE,
       fetchLogs,
     ),
+    takeLatest(
+      ACTIONS.SEARCH_LOGS,
+      saga,
+      ACTIONS.SEARCH_LOGS_SUCCESS,
+      ACTIONS.SEARCH_LOGS_FAILURE,
+      fetchLogs,
+    ),
   ]);
 }
