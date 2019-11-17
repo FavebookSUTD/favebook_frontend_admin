@@ -1,3 +1,7 @@
 {
-  "logs": "http://localhost:5000/logs"
+  "logs": "http://localhost:5000/logs",
+  "auth": {
+    "signIn": "http://localhost:5000/auth/login",
+    "logout": "http://localhost:5000/auth/logout"
+  }
 }
