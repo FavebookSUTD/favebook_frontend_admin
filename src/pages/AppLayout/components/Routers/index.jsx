@@ -7,12 +7,37 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 // import actions
+import { loadPrevPath, clearPrevPath } from '../../actions';
 
 // import page component
 import LogsPage from '@pages/LogsPage';
 import ClusterPage from '@pages/ClustersPage';
 
-const Routers = ({ history }) => {
+const Routers = ({ history, loadPrevPath, clearPrevPath }) => {
+  const savePrevPath = () => {
+    const {
+      location: { pathname },
+    } = history;
+    loadPrevPath(pathname);
+    return Promise.resolve();
+  };
+
+  const shouldRoute = () => {
+    const { sessionStorage } = window;
+    const user = sessionStorage.getItem('user');
+    if (user) {
+      const { username, access_token } = JSON.parse(sessionStorage.getItem('user'));
+      return new Promise(resolve => {
+        if (username && access_token) {
+          clearPrevPath();
+          return resolve();
+        }
+        return resolve(history.replace('/authenticate'));
+      });
+    }
+
+    return Promise.resolve(history.replace('/authenticate'));
+  };
   return (
     <Switch>
       <RouterGuard
@@ -21,16 +46,19 @@ const Routers = ({ history }) => {
             path: '/',
             exact: true,
             component: LogsPage,
+            canActivate: [savePrevPath, shouldRoute],
           },
           {
             path: '/logs',
             exact: true,
             component: LogsPage,
+            canActivate: [savePrevPath, shouldRoute],
           },
           {
             path: '/clusters',
             exact: true,
             component: ClusterPage,
+            canActivate: [savePrevPath, shouldRoute],
           },
           {
             path: '/*',
@@ -43,11 +71,26 @@ const Routers = ({ history }) => {
   );
 };
 
-Routers.propTypes = {};
+Routers.propTypes = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+    replace: PropTypes.func.isRequired,
+  }).isRequired,
+  loadPrevPath: PropTypes.func.isRequired,
+  clearPrevPath: PropTypes.func.isRequired,
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  loadPrevPath,
+  clearPrevPath,
+};
 
-const withConnect = connect();
+const withConnect = connect(
+  null,
+  mapDispatchToProps,
+);
 
 export default compose(
   withRouter,
