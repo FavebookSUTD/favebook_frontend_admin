@@ -1,7 +1,7 @@
 {
-  "logs": "",
+  "logs": "http://54.169.135.100:5000/logs",
   "auth": {
-    "signIn": "",
-    "logout": ""
+    "signIn": "http://54.169.135.100:5000/auth/login",
+    "logout": "http://54.169.135.100:5000/auth/logout"
   }
 }
