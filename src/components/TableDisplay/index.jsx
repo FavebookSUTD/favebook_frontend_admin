@@ -1,9 +1,8 @@
 // import React
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // import lodash
-import size from 'lodash/size';
 import map from 'lodash/map';
 import set from 'lodash/set';
 
@@ -18,11 +17,16 @@ const TableDisplay = ({
   data,
   titles,
   total,
+  pageNum,
   pageSize,
-  fetchNextHandler,
+  fetchPageHandler,
   infiniteScroll,
   pagination,
 }) => {
+  const [internalPageNum, setInternalPageNum] = useState(1);
+
+  const currentPageLogs = data[pageNum || internalPageNum];
+
   // Define the column title
   const columns = map(titles, title => {
     set(title, 'className', 'table-display-column');
@@ -31,17 +35,18 @@ const TableDisplay = ({
   });
 
   // Define the pagination setting
-  const paginationSetttings = pagination
+  const paginationSettings = pagination
     ? {
+        current: pageNum || internalPageNum,
         position: 'top',
         hideOnSinglePage: true,
         total,
         pageSize,
         onChange: (page, pageSize) => {
-          const currentLogsCount = size(data);
-          if (page > 1 && page * pageSize >= currentLogsCount && currentLogsCount < total) {
-            fetchNextHandler();
+          if (!pageNum) {
+            setInternalPageNum(page);
           }
+          fetchPageHandler(page, pageSize);
         },
       }
     : false;
@@ -53,10 +58,10 @@ const TableDisplay = ({
       <Table
         className="table-display"
         columns={columns}
-        dataSource={data}
+        dataSource={currentPageLogs}
         loading={loading}
         rowKey={record => record._id || record.id}
-        pagination={paginationSetttings}
+        pagination={paginationSettings}
         scroll={scrollSettings}
       />
     </div>
@@ -65,7 +70,7 @@ const TableDisplay = ({
 
 TableDisplay.propTypes = {
   loading: PropTypes.bool.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({}).isRequired,
   titles: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -73,15 +78,17 @@ TableDisplay.propTypes = {
     }),
   ).isRequired,
   total: PropTypes.number.isRequired,
+  pageNum: PropTypes.number,
   pageSize: PropTypes.number,
-  fetchNextHandler: PropTypes.func,
+  fetchPageHandler: PropTypes.func,
   infiniteScroll: PropTypes.bool,
   pagination: PropTypes.bool,
 };
 
 TableDisplay.defaultProps = {
+  pageNum: null,
   pageSize: 10,
-  fetchNextHandler: () => {},
+  fetchPageHandler: () => {},
   infiniteScroll: false,
   pagination: true,
 };

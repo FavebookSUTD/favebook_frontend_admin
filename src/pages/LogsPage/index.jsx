@@ -12,17 +12,17 @@ import injectReducer from '@utils/core/injectReducer';
 import injectSaga from '@utils/core/injectSaga';
 
 // import actions
-import { fetchInitLogs, fetchNextLogs, fetchSearchLogs, resetSearchLogs } from './actions';
+import { fetchLogs, fetchSearchLogs, resetSearchLogs } from './actions';
 
 // import selector
 import {
   selectLogs,
   selectTotalLogsCount,
-  selectCurrentLogsPageNum,
   selectSearchQuery,
   selectSearchLogs,
   selectTotalSearchLogsCount,
-  selectCurrentSearchLogsPageNum,
+  selectCurrentPageNum,
+  selectPageSize,
   selectLoading,
   selectError,
 } from './selectors';
@@ -42,8 +42,6 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 class LogsPage extends PureComponent {
-  PAGE_SIZE = 100;
-
   columns = [
     { title: 'Session ID', dataIndex: 'session_id' },
     { title: 'User ID', dataIndex: 'user_id' },
@@ -54,33 +52,27 @@ class LogsPage extends PureComponent {
   ];
 
   componentDidMount() {
-    const { fetchInitLogs, resetSearchLogs } = this.props;
-    fetchInitLogs(1, this.PAGE_SIZE);
+    const { pageSize, resetSearchLogs } = this.props;
+    this.fetchLogsHandler(1, pageSize);
     resetSearchLogs();
   }
 
-  fetchNextHandler = () => {
-    const {
-      currentLogsPageNum,
-      searchQuery,
-      currentSearchLogsPageNum,
-      loading,
-      fetchNextLogs,
-      fetchSearchLogs,
-    } = this.props;
+  fetchLogsHandler = (pageNum, pageSize) => {
+    // Used for pagination
+    const { searchQuery, loading, fetchLogs, fetchSearchLogs } = this.props;
 
     if (!loading) {
       if (searchQuery) {
-        fetchSearchLogs(searchQuery, currentSearchLogsPageNum + 1, this.PAGE_SIZE);
+        fetchSearchLogs(searchQuery, pageNum, pageSize);
       } else {
-        fetchNextLogs(currentLogsPageNum + 1, this.PAGE_SIZE);
+        fetchLogs(pageNum, pageSize);
       }
     }
   };
 
   searchLogsHandler = sessionId => {
-    const { fetchSearchLogs } = this.props;
-    fetchSearchLogs(sessionId, 1, this.PAGE_SIZE);
+    const { pageSize, fetchSearchLogs } = this.props;
+    fetchSearchLogs(sessionId, 1, pageSize);
   };
 
   resetSearchHandler = () => {
@@ -95,6 +87,8 @@ class LogsPage extends PureComponent {
       searchQuery,
       searchLogs,
       totalSearchLogsCount,
+      currentPageNum,
+      pageSize,
       loading,
       error,
     } = this.props;
@@ -115,8 +109,9 @@ class LogsPage extends PureComponent {
               data={searchQuery ? searchLogs : logs}
               titles={this.columns}
               total={searchQuery ? totalSearchLogsCount : totalLogsCount}
-              pageSize={Math.round(this.PAGE_SIZE / 2)}
-              fetchNextHandler={this.fetchNextHandler}
+              pageNum={currentPageNum}
+              pageSize={pageSize}
+              fetchPageHandler={this.fetchLogsHandler}
               infiniteScroll
             />
           </>
@@ -127,36 +122,17 @@ class LogsPage extends PureComponent {
 }
 
 LogsPage.propTypes = {
-  logs: PropTypes.arrayOf(
-    PropTypes.shape({
-      session_id: PropTypes.string,
-      user_id: PropTypes.string,
-      time: PropTypes.string,
-      request_type: PropTypes.string,
-      end_point: PropTypes.string,
-      status: PropTypes.string,
-    }),
-  ).isRequired,
+  logs: PropTypes.shape({}).isRequired,
   totalLogsCount: PropTypes.number.isRequired,
-  currentLogsPageNum: PropTypes.number.isRequired,
   searchQuery: PropTypes.string.isRequired,
-  searchLogs: PropTypes.arrayOf(
-    PropTypes.shape({
-      session_id: PropTypes.string,
-      user_id: PropTypes.string,
-      time: PropTypes.string,
-      request_type: PropTypes.string,
-      end_point: PropTypes.string,
-      status: PropTypes.string,
-    }),
-  ).isRequired,
+  searchLogs: PropTypes.shape({}).isRequired,
   totalSearchLogsCount: PropTypes.number.isRequired,
-  currentSearchLogsPageNum: PropTypes.number.isRequired,
+  currentPageNum: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
 
-  fetchInitLogs: PropTypes.func.isRequired,
-  fetchNextLogs: PropTypes.func.isRequired,
+  fetchLogs: PropTypes.func.isRequired,
   fetchSearchLogs: PropTypes.func.isRequired,
   resetSearchLogs: PropTypes.func.isRequired,
 };
@@ -164,18 +140,17 @@ LogsPage.propTypes = {
 const mapStateToProps = createStructuredSelector({
   logs: selectLogs,
   totalLogsCount: selectTotalLogsCount,
-  currentLogsPageNum: selectCurrentLogsPageNum,
   searchQuery: selectSearchQuery,
   searchLogs: selectSearchLogs,
   totalSearchLogsCount: selectTotalSearchLogsCount,
-  currentSearchLogsPageNum: selectCurrentSearchLogsPageNum,
+  currentPageNum: selectCurrentPageNum,
+  pageSize: selectPageSize,
   loading: selectLoading,
   error: selectError,
 });
 
 const mapDispatchToProps = {
-  fetchInitLogs,
-  fetchNextLogs,
+  fetchLogs,
   fetchSearchLogs,
   resetSearchLogs,
 };
