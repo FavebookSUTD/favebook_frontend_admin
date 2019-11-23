@@ -70,7 +70,7 @@ const TableDisplay = ({
 
 TableDisplay.propTypes = {
   loading: PropTypes.bool.isRequired,
-  data: PropTypes.shape({}).isRequired,
+  data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.arrayOf(PropTypes.object)]).isRequired,
   titles: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
