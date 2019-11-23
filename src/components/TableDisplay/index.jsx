@@ -25,7 +25,7 @@ const TableDisplay = ({
 }) => {
   const [internalPageNum, setInternalPageNum] = useState(1);
 
-  const currentPageLogs = data[pageNum || internalPageNum];
+  const currentPageLogs = pagination ? data[pageNum || internalPageNum] : data;
 
   // Define the column title
   const columns = map(titles, title => {
