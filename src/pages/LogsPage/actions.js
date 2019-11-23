@@ -1,10 +1,7 @@
 const ACTIONS = {
-  FETCH_INIT_LOGS: '@pages/LogsPage/FETCH_INIT_LOGS',
-  FETCH_INIT_LOGS_SUCCESS: '@pages/LogsPage/FETCH_INIT_LOGS_SUCCESS',
-  FETCH_INIT_LOGS_FAILURE: '@pages/LogsPage/FETCH_INIT_LOGS_FAILURE',
-  FETCH_NEXT_LOGS: '@pages/LogsPage/FETCH_NEXT_LOGS',
-  FETCH_NEXT_LOGS_SUCCESS: '@pages/LogsPage/FETCH_NEXT_LOGS_SUCCESS',
-  FETCH_NEXT_LOGS_FAILURE: '@pages/LogsPage/FETCH_NEXT_LOGS_FAILURE',
+  FETCH_LOGS: '@pages/LogsPage/FETCH_LOGS',
+  FETCH_LOGS_SUCCESS: '@pages/LogsPage/FETCH_LOGS_SUCCESS',
+  FETCH_LOGS_FAILURE: '@pages/LogsPage/FETCH_LOGS_FAILURE',
   SEARCH_LOGS: '@pages/LogsPage/SEARCH_LOGS',
   SEARCH_LOGS_SUCCESS: '@pages/LogsPage/SEARCH_LOGS_SUCCESS',
   SEARCH_LOGS_FAILURE: '@pages/LogsPage/SEARCH_LOGS_FAILURE',
@@ -13,13 +10,8 @@ const ACTIONS = {
 
 export default ACTIONS;
 
-export const fetchInitLogs = (pageNum, pageSize) => ({
-  type: ACTIONS.FETCH_INIT_LOGS,
-  payload: { pageNum, pageSize },
-});
-
-export const fetchNextLogs = (pageNum, pageSize) => ({
-  type: ACTIONS.FETCH_NEXT_LOGS,
+export const fetchLogs = (pageNum, pageSize) => ({
+  type: ACTIONS.FETCH_LOGS,
   payload: { pageNum, pageSize },
 });
 

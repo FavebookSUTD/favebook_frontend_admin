@@ -8,17 +8,10 @@ import { fetchLogs } from './api';
 export default function* watchLogsPage() {
   yield all([
     takeLatest(
-      ACTIONS.FETCH_INIT_LOGS,
+      ACTIONS.FETCH_LOGS,
       saga,
-      ACTIONS.FETCH_INIT_LOGS_SUCCESS,
-      ACTIONS.FETCH_INIT_LOGS_FAILURE,
-      fetchLogs,
-    ),
-    takeLatest(
-      ACTIONS.FETCH_NEXT_LOGS,
-      saga,
-      ACTIONS.FETCH_NEXT_LOGS_SUCCESS,
-      ACTIONS.FETCH_NEXT_LOGS_FAILURE,
+      ACTIONS.FETCH_LOGS_SUCCESS,
+      ACTIONS.FETCH_LOGS_FAILURE,
       fetchLogs,
     ),
     takeLatest(
