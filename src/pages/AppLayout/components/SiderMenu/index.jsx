@@ -3,7 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // import lodash
-import replace from 'lodash/replace';
+import reverse from 'lodash/reverse';
+import join from 'lodash/join';
+import split from 'lodash/split';
+import trim from 'lodash/trim';
 
 // import utils
 import { goto } from '@utils/goto';
@@ -16,8 +19,11 @@ import { Layout, Menu, Icon } from 'antd';
 
 // Extract antd components
 const { Sider } = Layout;
+const { SubMenu } = Menu;
 
 const SiderMenu = ({ path, siderOpenState, toggleSiderHandler }) => {
+  const menuKeys = split(trim(path, '/'), '/');
+
   return (
     <Sider
       className="sider-menu__container"
@@ -36,8 +42,9 @@ const SiderMenu = ({ path, siderOpenState, toggleSiderHandler }) => {
         className="sider-menu"
         theme="dark"
         mode="inline"
-        selectedKeys={[replace(path, '/', '') || 'logs']}
-        onClick={({ key }) => goto(key)}
+        defaultOpenKeys={menuKeys}
+        selectedKeys={trim(path, '/') ? menuKeys : ['logs']}
+        onClick={({ keyPath }) => goto(`/${join(reverse(keyPath), '/')}`)}
       >
         <Menu.Item className="sider-menu-item" key="logs">
           <Icon className="menu-icon" type="bars" />
@@ -47,6 +54,23 @@ const SiderMenu = ({ path, siderOpenState, toggleSiderHandler }) => {
           <Icon className="menu-icon" type="cluster" />
           <span>Clusters</span>
         </Menu.Item>
+        <SubMenu
+          className="sider-submenu"
+          key="analytics"
+          title={
+            <span className="sider-menu-item">
+              <Icon className="menu-icon" type="bar-chart" />
+              <span>Analytics</span>
+            </span>
+          }
+        >
+          <Menu.Item className="sider-menu-item" key="tfidf">
+            <span>TFIDF</span>
+          </Menu.Item>
+          <Menu.Item className="sider-menu-item" key="pearson">
+            <span>Pearson</span>
+          </Menu.Item>
+        </SubMenu>
       </Menu>
     </Sider>
   );

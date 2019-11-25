@@ -3,5 +3,8 @@
   "auth": {
     "signIn": "http://localhost:5000/auth/login",
     "logout": "http://localhost:5000/auth/logout"
+  },
+  "analytics": {
+    "tfidf": "http://localhost:5000/analytics/tfidf_result"
   }
 }

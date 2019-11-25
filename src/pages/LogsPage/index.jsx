@@ -117,6 +117,7 @@ class LogsPage extends PureComponent {
             />
             <TableDisplay
               loading={loading}
+              rowKey="_id"
               data={!isEmpty(searchQuery) ? searchLogs : logs}
               titles={this.columns}
               total={!isEmpty(searchQuery) ? totalSearchLogsCount : totalLogsCount}

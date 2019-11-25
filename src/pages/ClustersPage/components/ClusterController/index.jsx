@@ -22,7 +22,7 @@ const ClusterController = ({ loading, clusterCount, updateHandler }) => {
     if (isEqual(selectValue, 0)) {
       setSelectValue(clusterCount);
     }
-  });
+  }, [clusterCount]);
 
   return (
     <div className="cluster-controller__container">
