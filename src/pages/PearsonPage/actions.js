@@ -1,0 +1,18 @@
+const ACTIONS = {
+  FETCH_PEARSON_JOB_STATUS: '@pages/PearsonPage/FETCH_PEARSON_JOB_STATUS',
+  FETCH_PEARSON_JOB_STATUS_SUCCESS: '@pages/PearsonPage/FETCH_PEARSON_JOB_STATUS_SUCCESS',
+  FETCH_PEARSON_JOB_STATUS_FAILURE: '@pages/PearsonPage/FETCH_PEARSON_JOB_STATUS_FAILURE',
+  FETCH_PEARSON: '@pages/PearsonPage/FETCH_PEARSON',
+  FETCH_PEARSON_SUCCESS: '@pages/PearsonPage/FETCH_PEARSON_SUCCESS',
+  FETCH_PEARSON_FAILURE: '@pages/PearsonPage/FETCH_PEARSON_FAILURE',
+};
+
+export default ACTIONS;
+
+export const fetchPearsonJobStatus = () => ({
+  type: ACTIONS.FETCH_PEARSON_JOB_STATUS,
+});
+
+export const fetchPearson = () => ({
+  type: ACTIONS.FETCH_PEARSON,
+});

@@ -1,0 +1,28 @@
+{
+  "data": {
+    "pearsonCoefficient": 0.87364,
+    "reviewsAndPrices": [
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 31, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 32, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 33, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 34, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 12, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 },
+      { "reviewLength": 21, "price": 28.99 },
+      { "reviewLength": 37, "price": 28.99 }
+    ],
+    "totalCount": 20
+  }
+}
