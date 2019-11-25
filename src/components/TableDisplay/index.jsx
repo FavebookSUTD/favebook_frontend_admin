@@ -1,6 +1,7 @@
 // import React
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import uuid4 from 'uuid/v4';
 
 // import lodash
 import map from 'lodash/map';
@@ -13,6 +14,7 @@ import './index.scss';
 import { Table } from 'antd';
 
 const TableDisplay = ({
+  className,
   loading,
   rowKey,
   data,
@@ -27,7 +29,7 @@ const TableDisplay = ({
 }) => {
   const [internalPageNum, setInternalPageNum] = useState(1);
 
-  const currentPageLogs = pagination ? data[pageNum || internalPageNum] : data;
+  const currentPageData = pagination && pageNum ? data[pageNum] : data;
 
   // Define the column title
   const columns = map(titles, title => {
@@ -47,8 +49,9 @@ const TableDisplay = ({
         onChange: (page, pageSize) => {
           if (!pageNum) {
             setInternalPageNum(page);
+          } else {
+            fetchPageHandler(page, pageSize);
           }
-          fetchPageHandler(page, pageSize);
         },
       }
     : false;
@@ -56,13 +59,13 @@ const TableDisplay = ({
   const scrollSettings = infiniteScroll ? { y: true } : false;
 
   return (
-    <div className="table-display__container">
+    <div className={`table-display__container ${className}`}>
       <Table
         className="table-display"
         columns={columns}
-        dataSource={currentPageLogs}
+        dataSource={currentPageData}
         loading={loading}
-        rowKey={record => record[rowKey]}
+        rowKey={record => record[rowKey] || uuid4()}
         pagination={paginationSettings}
         scroll={scrollSettings}
       />
@@ -71,6 +74,7 @@ const TableDisplay = ({
 };
 
 TableDisplay.propTypes = {
+  className: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   rowKey: PropTypes.string.isRequired,
   data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.arrayOf(PropTypes.object)]).isRequired,

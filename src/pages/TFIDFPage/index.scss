@@ -40,6 +40,16 @@
   }
 
   .TFIDF-page__table-spin-wrapper {
-    font-size: 20px;
+    overflow: hidden;
+    .spark-pending-text {
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .ant-spin-container {
+      height: 100%;
+      .TFIDF-page__table {
+        height: 100%;
+      }
+    }
   }
 }
