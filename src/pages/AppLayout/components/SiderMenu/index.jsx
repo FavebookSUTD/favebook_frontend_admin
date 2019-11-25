@@ -64,8 +64,8 @@ const SiderMenu = ({ path, siderOpenState, toggleSiderHandler }) => {
             </span>
           }
         >
-          <Menu.Item className="sider-menu-item" key="tfitf">
-            <span>TFITF</span>
+          <Menu.Item className="sider-menu-item" key="tfidf">
+            <span>TFIDF</span>
           </Menu.Item>
           <Menu.Item className="sider-menu-item" key="pearson">
             <span>Pearson</span>

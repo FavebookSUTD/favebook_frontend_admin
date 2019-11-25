@@ -1,7 +1,18 @@
 import api from '@apis/api';
 import apiConfig from '@apis/apiConfig';
 
-export function fetchTFITF({ payload }) {
+export function fetchTFIDFJobStatus() {
+  return new Promise(resolve =>
+    setTimeout(() => resolve({ data: { job: 'tfidf', status: 'success' } }), 3000),
+  );
+  // return api.get({
+  //   url: apiConfig.analytics.tfitf,
+  //   query: { job: 'tfidf' },
+  //   needAuthenticate: true,
+  // });
+}
+
+export function fetchTFIDF({ payload }) {
   const { searchValue, searchKey, pageNum, pageSize } = payload;
 
   const query = {
@@ -12,7 +23,7 @@ export function fetchTFITF({ payload }) {
   query[searchKey] = searchValue;
   query.filter = searchKey;
 
-  const { data } = require('./mock/mockTFITFData.json');
+  const { data } = require('./mock/mockTFIDFData.json');
 
   return new Promise(resolve =>
     setTimeout(() => resolve({ data, pageNum, query: { searchValue, searchKey } }), 1000),
@@ -20,7 +31,7 @@ export function fetchTFITF({ payload }) {
 
   // return api
   //   .get({
-  //     url: apiConfig.analytics.tfitf,
+  //     url: apiConfig.analytics.tfidf,
   //     query,
   //     needAuthenticate: true,
   //   })

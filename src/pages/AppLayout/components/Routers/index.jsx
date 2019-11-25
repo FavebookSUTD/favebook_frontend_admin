@@ -12,7 +12,7 @@ import { loadPrevPath, clearPrevPath } from '../../actions';
 // import page component
 import LogsPage from '@pages/LogsPage';
 import ClusterPage from '@pages/ClustersPage';
-import TFITFPage from '@pages/TFITFPage';
+import TFIDFPage from '@pages/TFIDFPage';
 
 const Routers = ({ history, loadPrevPath, clearPrevPath }) => {
   const savePrevPath = () => {
@@ -62,9 +62,9 @@ const Routers = ({ history, loadPrevPath, clearPrevPath }) => {
             canActivate: [savePrevPath, shouldRoute],
           },
           {
-            path: '/analytics/tfitf',
+            path: '/analytics/tfidf',
             exact: true,
-            component: TFITFPage,
+            component: TFIDFPage,
             canActivate: [savePrevPath, shouldRoute],
           },
           {
