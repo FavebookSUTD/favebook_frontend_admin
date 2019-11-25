@@ -1,0 +1,14 @@
+@import '@themes/themeMixins.scss';
+
+.TFITF-page__container {
+  @include contentLayout();
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .TFITF-page-title {
+    font-size: 40px;
+    font-weight: 300;
+  }
+}
