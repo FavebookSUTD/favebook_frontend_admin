@@ -5,6 +5,8 @@
     "logout": "http://localhost:5000/auth/logout"
   },
   "analytics": {
-    "tfidf": "http://localhost:5000/analytics/tfidf_result"
+    "jobStatus": "http://localhost:5000/analytics/status",
+    "tfidf": "http://localhost:5000/analytics/tfidf_result",
+    "pearson": "http://localhost:5000/analytics/pearson_result"
   }
 }
