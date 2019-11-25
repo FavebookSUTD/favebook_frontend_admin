@@ -28,8 +28,11 @@ import {
 } from './selectors';
 
 // import local components
-import LogsFilter from './components/LogsFilter';
+import FilterController from '@components/FilterController';
 import TableDisplay from '@components/TableDisplay';
+
+// import lodash
+import isEmpty from 'lodash/isEmpty';
 
 // import local styling
 import './index.scss';
@@ -51,6 +54,14 @@ class LogsPage extends PureComponent {
     { title: 'Status Code', dataIndex: 'status' },
   ];
 
+  filterOptions = [
+    { key: 'session_id', displayValue: 'Session ID', default: true },
+    { key: 'user_id', displayValue: 'User ID', default: false },
+    { key: 'end_point', displayValue: 'Endpoint', default: false },
+    { key: 'request_type', displayValue: 'Request Type', default: false },
+    { key: 'status', displayValue: 'Status Code', default: false },
+  ];
+
   componentDidMount() {
     const { pageSize, resetSearchLogs } = this.props;
     this.fetchLogsHandler(1, pageSize);
@@ -60,19 +71,18 @@ class LogsPage extends PureComponent {
   fetchLogsHandler = (pageNum, pageSize) => {
     // Used for pagination
     const { searchQuery, loading, fetchLogs, fetchSearchLogs } = this.props;
-
     if (!loading) {
-      if (searchQuery) {
-        fetchSearchLogs(searchQuery, pageNum, pageSize);
+      if (!isEmpty(searchQuery)) {
+        fetchSearchLogs(searchQuery.searchValue, searchQuery.searchKey, pageNum, pageSize);
       } else {
         fetchLogs(pageNum, pageSize);
       }
     }
   };
 
-  searchLogsHandler = sessionId => {
+  searchLogsHandler = (searchValue, searchKey) => {
     const { pageSize, fetchSearchLogs } = this.props;
-    fetchSearchLogs(sessionId, 1, pageSize);
+    fetchSearchLogs(searchValue, searchKey, 1, pageSize);
   };
 
   resetSearchHandler = () => {
@@ -100,15 +110,16 @@ class LogsPage extends PureComponent {
           <Result status="500" title="Something went wrong in the server." />
         ) : (
           <>
-            <LogsFilter
+            <FilterController
               searchHandler={this.searchLogsHandler}
               resetHandler={this.resetSearchHandler}
+              options={this.filterOptions}
             />
             <TableDisplay
               loading={loading}
-              data={searchQuery ? searchLogs : logs}
+              data={!isEmpty(searchQuery) ? searchLogs : logs}
               titles={this.columns}
-              total={searchQuery ? totalSearchLogsCount : totalLogsCount}
+              total={!isEmpty(searchQuery) ? totalSearchLogsCount : totalLogsCount}
               pageNum={currentPageNum}
               pageSize={pageSize}
               fetchPageHandler={this.fetchLogsHandler}
@@ -124,7 +135,10 @@ class LogsPage extends PureComponent {
 LogsPage.propTypes = {
   logs: PropTypes.shape({}).isRequired,
   totalLogsCount: PropTypes.number.isRequired,
-  searchQuery: PropTypes.string.isRequired,
+  searchQuery: PropTypes.shape({
+    searchValue: PropTypes.string,
+    searchKey: PropTypes.string,
+  }).isRequired,
   searchLogs: PropTypes.shape({}).isRequired,
   totalSearchLogsCount: PropTypes.number.isRequired,
   currentPageNum: PropTypes.number.isRequired,

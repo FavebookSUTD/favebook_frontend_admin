@@ -4,7 +4,7 @@ import ACTIONS from './actions';
 export const initialState = fromJS({
   logs: {},
   totalLogsCount: 0,
-  searchQuery: '',
+  searchQuery: {},
   searchLogs: {},
   totalSearchLogsCount: 0,
   currentPageNum: 1,
@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
 
     case ACTIONS.SEARCH_LOGS_SUCCESS:
       return state
-        .set('searchQuery', action.payload.query)
+        .set('searchQuery', fromJS(action.payload.query))
         .setIn(['searchLogs', action.payload.pageNum], fromJS(action.payload.data.logs))
         .set('totalSearchLogsCount', action.payload.data.total_count)
         .set('loading', false)
@@ -42,7 +42,7 @@ export default function reducer(state = initialState, action) {
 
     case ACTIONS.RESET_SEARCH_LOGS:
       return state
-        .set('searchQuery', '')
+        .set('searchQuery', fromJS({}))
         .set('searchLogs', fromJS({}))
         .set('totalSearchLogsCount', 0)
         .set('currentPageNum', 1);

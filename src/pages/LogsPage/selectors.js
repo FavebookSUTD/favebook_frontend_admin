@@ -7,7 +7,7 @@ const selectLogs = selectToJS(selectLogsPage, 'logs');
 
 const selectTotalLogsCount = select(selectLogsPage, 'totalLogsCount');
 
-const selectSearchQuery = select(selectLogsPage, 'searchQuery');
+const selectSearchQuery = selectToJS(selectLogsPage, 'searchQuery');
 
 const selectSearchLogs = selectToJS(selectLogsPage, 'searchLogs');
 
