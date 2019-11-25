@@ -15,14 +15,15 @@ import { Typography, Select, Button } from 'antd';
 const { Title } = Typography;
 const { Option } = Select;
 
-const ClusterController = ({ loading, clusterCount, updateHandler }) => {
+const ClusterController = ({ loading, clusterCount, updateHandler, refreshHandler }) => {
   const [selectValue, setSelectValue] = useState(clusterCount);
+  const [trigger, setTrigger] = useState('');
 
   useEffect(() => {
     if (isEqual(selectValue, 0)) {
       setSelectValue(clusterCount);
     }
-  }, [clusterCount]);
+  }, [selectValue, clusterCount]);
 
   return (
     <div className="cluster-controller__container">
@@ -47,9 +48,26 @@ const ClusterController = ({ loading, clusterCount, updateHandler }) => {
           className="spark-btn"
           type="primary"
           shape="round"
-          onClick={() => updateHandler(selectValue)}
+          loading={isEqual(trigger, 'spark') && loading}
+          onClick={() => {
+            setTrigger('spark');
+            updateHandler(selectValue);
+          }}
         >
           Run Spark Job
+        </Button>
+        <Button
+          className="refresh-btn"
+          icon="reload"
+          type="primary"
+          shape="round"
+          loading={isEqual(trigger, 'refresh') && loading}
+          onClick={() => {
+            setTrigger('refresh');
+            refreshHandler();
+          }}
+        >
+          Refresh
         </Button>
       </div>
     </div>
@@ -60,6 +78,7 @@ ClusterController.propTypes = {
   loading: PropTypes.bool.isRequired,
   clusterCount: PropTypes.number.isRequired,
   updateHandler: PropTypes.func.isRequired,
+  refreshHandler: PropTypes.func.isRequired,
 };
 
 export default ClusterController;
