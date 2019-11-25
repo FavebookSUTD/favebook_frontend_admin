@@ -5,6 +5,8 @@
     "logout": "http://54.169.135.100:5000/auth/logout"
   },
   "analytics": {
-    "tfidf": ""
+    "jobStatus": "",
+    "tfidf": "",
+    "pearson": ""
   }
 }

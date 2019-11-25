@@ -1,26 +1,36 @@
 @import '@themes/themeMixins.scss';
 @import '@themes/themeVariables.scss';
 
-.TFIDF-page__container {
+.pearson-page__container {
   @include contentLayout();
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
-  .TFIDF-page-title {
+  .pearson-page-title {
     font-size: 40px;
     font-weight: 300;
   }
 
-  .TFIDF-page__controller-container {
+  .pearson-page__info-container {
     & > div {
       margin: 0;
     }
-
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
+
+    .pearson-page-coefficient {
+      height: 45px;
+      width: 400px;
+      margin: 0;
+      padding: 0 1rem;
+      line-height: 45px;
+      font-weight: 800;
+      color: $primary-header-color;
+      background: $primary-background-color;
+    }
 
     .reload-button {
       height: 45px;
@@ -39,7 +49,7 @@
     }
   }
 
-  .TFIDF-page__table-spin-wrapper {
+  .pearson-page__table-spin-wrapper {
     overflow: hidden;
     .spark-pending-text {
       font-size: 20px;
@@ -47,7 +57,7 @@
     }
     .ant-spin-container {
       height: 100%;
-      .TFIDF-page__table {
+      .pearson-page__table {
         height: 100%;
       }
     }

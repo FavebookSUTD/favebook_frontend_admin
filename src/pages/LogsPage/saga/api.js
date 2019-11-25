@@ -9,8 +9,10 @@ export function fetchLogs({ payload }) {
     'pg-size': pageSize,
   };
 
-  query[searchKey] = searchValue;
-  query.filter = searchKey;
+  if (searchValue && searchKey) {
+    query[searchKey] = searchValue;
+    query.filter = searchKey;
+  }
 
   return api
     .get({
