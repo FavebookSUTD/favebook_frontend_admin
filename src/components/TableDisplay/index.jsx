@@ -14,6 +14,7 @@ import { Table } from 'antd';
 
 const TableDisplay = ({
   loading,
+  rowKey,
   data,
   titles,
   total,
@@ -61,7 +62,7 @@ const TableDisplay = ({
         columns={columns}
         dataSource={currentPageLogs}
         loading={loading}
-        rowKey={record => record._id || record.id}
+        rowKey={record => record[rowKey]}
         pagination={paginationSettings}
         scroll={scrollSettings}
       />
@@ -71,6 +72,7 @@ const TableDisplay = ({
 
 TableDisplay.propTypes = {
   loading: PropTypes.bool.isRequired,
+  rowKey: PropTypes.string.isRequired,
   data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.arrayOf(PropTypes.object)]).isRequired,
   titles: PropTypes.arrayOf(
     PropTypes.shape({
