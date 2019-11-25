@@ -104,7 +104,7 @@ class PearsonPage extends PureComponent {
               <TableDisplay
                 className="pearson-page__table"
                 loading={loading && !sparkRunning}
-                rowKey="reviewId"
+                rowKey=""
                 data={reviewsAndPrices}
                 titles={this.columns}
                 total={totalCount}

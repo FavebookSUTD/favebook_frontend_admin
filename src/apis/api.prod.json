@@ -7,6 +7,8 @@
   "analytics": {
     "jobStatus": "",
     "tfidf": "",
-    "pearson": ""
+    "pearson": "",
+    "sparkJob": "",
+    "clusterHealth": ""
   }
 }

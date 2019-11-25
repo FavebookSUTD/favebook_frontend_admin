@@ -12,7 +12,7 @@ import injectReducer from '@utils/core/injectReducer';
 import injectSaga from '@utils/core/injectSaga';
 
 // import actions
-import { fetchClusterStats, updateCluster } from './actions';
+import { fetchClusterStats, startSparkJob } from './actions';
 
 // import selector
 import { selectLoading, selectError, selectClusters, selectTotalClusterNum } from './selectors';
@@ -37,13 +37,14 @@ class ClustersPage extends PureComponent {
     fetchClusterStats();
   }
 
-  updateClusterHandler = clusterNum => {
-    const { updateCluster } = this.props;
-    updateCluster(clusterNum);
+  startSparkJobHandler = clusterNum => {
+    const { startSparkJob } = this.props;
+    startSparkJob(clusterNum, 'tfidf');
+    startSparkJob(clusterNum, 'pearson');
   };
 
   render() {
-    const { loading, clusters, totalClusterNum } = this.props;
+    const { loading, clusters, totalClusterNum, fetchClusterStats } = this.props;
     const tableTitles = [
       {
         title: 'Name',
@@ -51,7 +52,7 @@ class ClustersPage extends PureComponent {
       },
       {
         title: 'Address',
-        dataIndex: 'ip',
+        dataIndex: 'address',
       },
       {
         title: 'Status',
@@ -59,11 +60,11 @@ class ClustersPage extends PureComponent {
       },
       {
         title: 'Cores',
-        dataIndex: 'core',
+        dataIndex: 'cores',
       },
       {
         title: 'Memory',
-        dataIndex: 'memory',
+        dataIndex: 'memoryMB',
       },
     ];
 
@@ -73,9 +74,11 @@ class ClustersPage extends PureComponent {
         <ClusterController
           loading={loading}
           clusterCount={totalClusterNum}
-          updateHandler={this.updateClusterHandler}
+          updateHandler={this.startSparkJobHandler}
+          refreshHandler={fetchClusterStats}
         />
         <TableDisplay
+          rowKey=""
           loading={loading}
           data={clusters}
           titles={tableTitles}
@@ -95,7 +98,7 @@ ClustersPage.propTypes = {
   totalClusterNum: PropTypes.number.isRequired,
 
   fetchClusterStats: PropTypes.func.isRequired,
-  updateCluster: PropTypes.func.isRequired,
+  startSparkJob: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -107,7 +110,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchClusterStats,
-  updateCluster,
+  startSparkJob,
 };
 
 const withReducer = injectReducer({ key: 'ClustersPage', reducer });

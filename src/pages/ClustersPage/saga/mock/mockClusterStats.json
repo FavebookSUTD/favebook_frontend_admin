@@ -1,135 +1,60 @@
 {
-  "data": {
-    "clusters": [
-      {
-        "id": 1,
-        "name": "Node 1",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 2,
-        "name": "Node 2",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 3,
-        "name": "Node 3",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 4,
-        "name": "Node 4",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 5,
-        "name": "Node 5",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 6,
-        "name": "Node 6",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 7,
-        "name": "Node 7",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 8,
-        "name": "Node 8",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 9,
-        "name": "Node 9",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 10,
-        "name": "Node 10",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 11,
-        "name": "Node 11",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 12,
-        "name": "Node 12",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 13,
-        "name": "Node 13",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 14,
-        "name": "Node 14",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 15,
-        "name": "Node 15",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      },
-      {
-        "id": 16,
-        "name": "Node 16",
-        "ip": "10.19.1.165",
-        "status": "Alive",
-        "core": "1",
-        "memory": "1GB"
-      }
-    ],
-    "cluster_count": 16
-  }
+  "data": [
+    {
+      "name": "datanode1",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    },
+    {
+      "name": "datanode2",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    },
+    {
+      "name": "datanode3",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    },
+    {
+      "name": "datanode4",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    },
+    {
+      "name": "datanode5",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    },
+    {
+      "name": "datanode6",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    },
+    {
+      "name": "datanode7",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    },
+    {
+      "name": "datanode8",
+      "address": "10.19.0.6:3400",
+      "status": "alive",
+      "cores": 1,
+      "memoryMB": 1024
+    }
+  ]
 }
