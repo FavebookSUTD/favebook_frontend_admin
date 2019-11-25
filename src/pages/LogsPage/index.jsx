@@ -124,6 +124,7 @@ class LogsPage extends PureComponent {
               pageSize={pageSize}
               fetchPageHandler={this.fetchLogsHandler}
               infiniteScroll
+              ellipsis={false}
             />
           </>
         )}
