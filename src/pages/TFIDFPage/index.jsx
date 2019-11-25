@@ -65,8 +65,10 @@ class TFIDFPage extends PureComponent {
   ];
 
   componentDidMount() {
-    const { fetchTFIDFJobStatus, resetSearchTFIDF } = this.props;
-    fetchTFIDFJobStatus();
+    const { TFIDFJobStatus, fetchTFIDFJobStatus, resetSearchTFIDF } = this.props;
+    if (isEqual(TFIDFJobStatus, 'running')) {
+      fetchTFIDFJobStatus();
+    }
     resetSearchTFIDF();
   }
 
@@ -142,11 +144,12 @@ class TFIDFPage extends PureComponent {
               </Button>
             </div>
             <Spin
-              className="TFIDF-page__table-spin-wrapper"
-              tip="Running Spark Job ..."
+              wrapperClassName="TFIDF-page__table-spin-wrapper"
+              tip={<span className="spark-pending-text">Checking Spark Job ...</span>}
               spinning={sparkRunning}
             >
               <TableDisplay
+                className="TFIDF-page__table"
                 loading={loading && !sparkRunning}
                 rowKey="reviewId"
                 data={!isEmpty(searchQuery) ? searchTFIDF : TFIDF}
