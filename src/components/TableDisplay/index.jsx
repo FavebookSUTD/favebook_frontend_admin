@@ -22,6 +22,7 @@ const TableDisplay = ({
   fetchPageHandler,
   infiniteScroll,
   pagination,
+  ellipsis,
 }) => {
   const [internalPageNum, setInternalPageNum] = useState(1);
 
@@ -30,7 +31,7 @@ const TableDisplay = ({
   // Define the column title
   const columns = map(titles, title => {
     set(title, 'className', 'table-display-column');
-    set(title, 'ellipsis', true);
+    set(title, 'ellipsis', ellipsis);
     return title;
   });
 
@@ -83,6 +84,7 @@ TableDisplay.propTypes = {
   fetchPageHandler: PropTypes.func,
   infiniteScroll: PropTypes.bool,
   pagination: PropTypes.bool,
+  ellipsis: PropTypes.bool,
 };
 
 TableDisplay.defaultProps = {
@@ -91,6 +93,7 @@ TableDisplay.defaultProps = {
   fetchPageHandler: () => {},
   infiniteScroll: false,
   pagination: true,
+  ellipsis: true,
 };
 
 export default TableDisplay;

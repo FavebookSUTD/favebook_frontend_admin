@@ -15,9 +15,9 @@ export const fetchLogs = (pageNum, pageSize) => ({
   payload: { pageNum, pageSize },
 });
 
-export const fetchSearchLogs = (sessionID, pageNum, pageSize) => ({
+export const fetchSearchLogs = (searchValue, searchKey, pageNum, pageSize) => ({
   type: ACTIONS.SEARCH_LOGS,
-  payload: { sessionID, pageNum, pageSize },
+  payload: { searchValue, searchKey, pageNum, pageSize },
 });
 
 export const resetSearchLogs = () => ({
