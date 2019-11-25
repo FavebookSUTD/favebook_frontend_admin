@@ -74,7 +74,7 @@ const TableDisplay = ({
 };
 
 TableDisplay.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   rowKey: PropTypes.string.isRequired,
   data: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.arrayOf(PropTypes.object)]).isRequired,
@@ -94,6 +94,7 @@ TableDisplay.propTypes = {
 };
 
 TableDisplay.defaultProps = {
+  className: '',
   pageNum: null,
   pageSize: 10,
   fetchPageHandler: () => {},
