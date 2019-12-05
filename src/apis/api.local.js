@@ -4,6 +4,11 @@ const config = {
     signIn: 'http://localhost:5000/auth/login',
     logout: 'http://localhost:5000/auth/logout',
   },
+  books: {
+    add: 'http://localhost:5000/books/add',
+    history: 'http://localhost:5000/books/add/history',
+    search: 'http://localhost:5000/books/add/search',
+  },
   analytics: {
     jobStatus: 'http://localhost:5000/analytics/status',
     tfidf: 'http://localhost:5000/analytics/tfidf_result',

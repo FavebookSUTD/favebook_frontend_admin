@@ -12,6 +12,11 @@ const config = {
     signIn: `${backendURL}/auth/login`,
     logout: `${backendURL}/auth/logout`,
   },
+  books: {
+    add: `${backendURL}/books/add`,
+    history: `${backendURL}/books/add/history`,
+    search: `${backendURL}/books/add/search`,
+  },
   analytics: {
     jobStatus: `${sparkURL}/analytics/status`,
     tfidf: `${sparkURL}/analytics/tfidf_result`,
