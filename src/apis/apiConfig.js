@@ -1,21 +1,25 @@
+import prodConfig from './api.prod';
+import devConfig from './api.dev';
+import localConfig from './api.local';
+
 let apiConfig;
 
 if (process && process.env) {
   switch (process.env.REACT_APP_API_ENV) {
     case 'production':
-      apiConfig = require('./api.prod.json');
+      apiConfig = prodConfig;
       break;
 
     case 'development':
-      apiConfig = require('./api.dev.json');
+      apiConfig = devConfig;
       break;
 
     case 'local':
-      apiConfig = require('./api.local.json');
+      apiConfig = localConfig;
       break;
 
     default:
-      apiConfig = require('./api.local.json');
+      apiConfig = localConfig;
       break;
   }
 }
