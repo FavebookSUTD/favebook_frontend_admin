@@ -23,7 +23,7 @@ export default function* modalSubmitHandler(
     // Dispatch failure action
     yield put({
       type: actionFailure,
-      error,
+      payload: error,
     });
   }
 }
