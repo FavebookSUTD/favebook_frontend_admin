@@ -1,0 +1,66 @@
+@import '@themes/themeVariables.scss';
+
+@mixin inputField {
+  .ant-input {
+    height: 40px;
+    padding-right: 30px !important;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    font-size: 16px;
+  }
+
+  .ant-input-clear-icon {
+    font-size: 16px;
+  }
+
+  .ant-input-search-icon {
+    &:hover {
+      color: $primary-color;
+    }
+    font-size: 20px;
+  }
+}
+
+.book-search__container {
+  min-height: 56px;
+  height: 56px;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-content: center;
+  background: $primary-background-color;
+
+  .book-search__title-container {
+    flex: 1 0;
+    @include inputField();
+  }
+
+  .book-search__written-title {
+    margin: 0 0.5rem;
+    display: inline-block;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .book-search__author-container {
+    flex: 1 0;
+    @include inputField();
+  }
+
+  .search-btn {
+    &:before {
+      background: none;
+    }
+    height: 40px;
+    width: 40px;
+    margin: 0 0.5rem;
+    font-size: 25px;
+    background: none;
+    border: none;
+    color: $secondary-color;
+  }
+}
