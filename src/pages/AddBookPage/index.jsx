@@ -12,7 +12,7 @@ import injectReducer from '@utils/core/injectReducer';
 import injectSaga from '@utils/core/injectSaga';
 
 // import actions
-import { fetchBookHistory, searchBook, resetSearch, addBook } from './actions';
+import { fetchBookHistory, searchBook, addBook, closeModal } from './actions';
 
 // import selector
 import {
@@ -28,6 +28,8 @@ import {
 
 // import local components
 import TableDisplay from '@components/TableDisplay';
+import BookSearch from './components/BookSearch';
+import BookSelectionModal from './components/BookSelectionModal';
 
 // import lodash
 
@@ -51,9 +53,8 @@ class AddBookPage extends PureComponent {
   ];
 
   componentDidMount() {
-    const { pageSize, resetSearch } = this.props;
+    const { pageSize } = this.props;
     this.fetchBookHandler(1, pageSize);
-    resetSearch();
   }
 
   fetchBookHandler = (pageNum, pageSize) => {
@@ -67,14 +68,39 @@ class AddBookPage extends PureComponent {
     }
   };
 
+  searchBookHandler = (bookTitle, bookAuthor) => {
+    const {
+      loading: { search },
+      searchBook,
+    } = this.props;
+
+    if (!search) {
+      searchBook(bookTitle, bookAuthor);
+    }
+  };
+
+  addBookHandler = ({ asin, author, description, genres, imUrl, title }) => {
+    const {
+      loading: { addBook: addBookLoading },
+      addBook,
+    } = this.props;
+
+    if (!addBookLoading) {
+      addBook(asin, author, description, genres, imUrl, title);
+    }
+  };
+
   render() {
     const {
       books,
       totalCount,
       pageNum,
       pageSize,
-      loading: { books: booksLoading },
+      searchResult,
+      visible,
+      loading,
       error: { books: booksError },
+      closeModal,
     } = this.props;
 
     return (
@@ -84,8 +110,9 @@ class AddBookPage extends PureComponent {
           <Result status="500" title="Something went wrong in the server." />
         ) : (
           <>
+            <BookSearch loading={loading.search} searchHandler={this.searchBookHandler} />
             <TableDisplay
-              loading={booksLoading}
+              loading={loading.books}
               rowKey="_id"
               data={books}
               titles={this.columns}
@@ -95,6 +122,13 @@ class AddBookPage extends PureComponent {
               fetchPageHandler={this.fetchBookHandler}
               infiniteScroll
               ellipsis={false}
+            />
+            <BookSelectionModal
+              loading={loading.addBook}
+              visible={visible}
+              options={searchResult}
+              submitHandler={this.addBookHandler}
+              closeModalHandler={closeModal}
             />
           </>
         )}
@@ -123,8 +157,8 @@ AddBookPage.propTypes = {
 
   fetchBookHistory: PropTypes.func.isRequired,
   searchBook: PropTypes.func.isRequired,
-  resetSearch: PropTypes.func.isRequired,
   addBook: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -141,8 +175,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   fetchBookHistory,
   searchBook,
-  resetSearch,
   addBook,
+  closeModal,
 };
 
 const withReducer = injectReducer({ key: 'AddBookPage', reducer });

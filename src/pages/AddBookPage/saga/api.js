@@ -1,5 +1,6 @@
 import api from '@apis/api';
 import apiConfig from '@apis/apiConfig';
+import nth from 'lodash/nth';
 
 export function fetchBookHistory({ payload }) {
   const { pageNum, pageSize } = payload;
@@ -37,10 +38,10 @@ export function addBook({ payload }) {
   return api.post({
     url: apiConfig.books.add,
     body: {
-      asin,
+      asin: asin || '',
       author: author || '',
       description: description || '',
-      genres: genres || '',
+      genres: nth(genres, 0) || '',
       imUrl: imUrl || '',
       title: title || '',
     },

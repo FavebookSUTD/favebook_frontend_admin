@@ -5,7 +5,6 @@ const ACTIONS = {
   SEARCH_BOOK: '@pages/AddBookPage/SEARCH_BOOK',
   SEARCH_BOOK_SUCCESS: '@pages/AddBookPage/SEARCH_BOOK_SUCCESS',
   SEARCH_BOOK_FAILURE: '@pages/AddBookPage/SEARCH_BOOK_FAILURE',
-  RESET_SEARCH_BOOK: '@pages/AddBookPage/RESET_SEARCH_BOOK',
   ADD_BOOK: '@pages/AddBookPage/ADD_BOOK',
   ADD_BOOK_SUCCESS: '@pages/AddBookPage/ADD_BOOK_SUCCESS',
   ADD_BOOK_FAILURE: '@pages/AddBookPage/ADD_BOOK_FAILURE',
@@ -23,10 +22,6 @@ export const fetchBookHistory = (pageNum, pageSize) => ({
 export const searchBook = (bookTitle, bookAuthor) => ({
   type: ACTIONS.SEARCH_BOOK,
   payload: { bookTitle, bookAuthor },
-});
-
-export const resetSearch = () => ({
-  type: ACTIONS.RESET_SEARCH_BOOK,
 });
 
 export const addBook = (asin, author, description, genres, imUrl, title) => ({

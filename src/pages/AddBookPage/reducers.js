@@ -23,10 +23,7 @@ export const initialState = fromJS({
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.FETCH_BOOK_HISTORY:
-      return state
-        .setIn(['loading', 'books'], true)
-        .set('pageNum', action.payload.pageNum)
-        .set('pageSize', action.payload.pageSize);
+      return state.setIn(['loading', 'books'], true).set('pageNum', action.payload.pageNum);
 
     case ACTIONS.FETCH_BOOK_HISTORY_SUCCESS:
       return state
@@ -53,9 +50,6 @@ export default function reducer(state = initialState, action) {
       return state
         .setIn(['loading', 'search'], false)
         .setIn(['error', 'search'], action.payload.toString());
-
-    case ACTIONS.RESET_SEARCH_BOOK:
-      return state.set('searchResult', fromJS([]));
 
     case ACTIONS.ADD_BOOK:
       return state.setIn(['loading', 'addBook'], true);

@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
 import saga from '@sagas/commonSagas';
-import { openModalHandler } from './sagas';
+import { openModalHandler, updateBooksHanlder } from './sagas';
 import notificationsHandler from '@sagas/notificationsHandler';
 import modalSubmitHandler from '@sagas/modalSubmitHandler';
 
@@ -45,6 +45,7 @@ export default function* watchLogsPage() {
       'success',
       'Successfully added the book.',
     ),
-    takeLatest(ACTIONS.ADD_BOOK_FAILURE, notificationsHandler, 'error', 'Failed to add the book.'),
+    takeLatest(ACTIONS.ADD_BOOK_SUCCESS, updateBooksHanlder, ACTIONS.FETCH_BOOK_HISTORY),
+    takeLatest(ACTIONS.ADD_BOOK_FAILURE, notificationsHandler, 'error', 'Book already added.'),
   ]);
 }
