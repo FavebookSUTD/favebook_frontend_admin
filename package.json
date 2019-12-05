@@ -32,13 +32,12 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_API_ENV=local SKIP_PREFLIGHT_CHECK=true react-app-rewired start",
+    "start": "cross-env REACT_APP_API_ENV=local SKIP_PREFLIGHT_CHECK=true react-app-rewired start ",
     "start:dev": "cross-env REACT_APP_API_ENV=development SKIP_PREFLIGHT_CHECK=true react-app-rewired start",
+    "start:prod": "cross-env REACT_APP_API_ENV=production SKIP_PREFLIGHT_CHECK=true REACT_APP_BACKEND_URL=$BACKEND_URL REACT_APP_SPARK_URL=$SPARK_URL react-app-rewired start",
     "build": "cross-env REACT_APP_API_ENV=production SKIP_PREFLIGHT_CHECK=true react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "deploy:dev": "docker build -f Dockerfile.dev . -t tayts/aoogebra-admin-dev:latest && docker push tayts/tayts/aoogebra-admin-dev:latest && docker image prune -f",
-    "deploy": "docker build . -t tayts/aoogebra-admin:latest && docker push tayts/aoogebra-admin:latest && docker image prune -f"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

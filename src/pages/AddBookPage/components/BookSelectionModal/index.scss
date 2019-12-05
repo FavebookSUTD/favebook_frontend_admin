@@ -1,0 +1,61 @@
+@import '@themes/themeVariables.scss';
+
+.book-selection-modal__container {
+  width: auto !important;
+  .ant-modal-body {
+    padding: 36px;
+    .book-select-modal__content-container {
+      width: max-content;
+      display: flex;
+      justify-content: center;
+
+      .option-card__container {
+        height: 100%;
+        width: 300px;
+        padding: 1rem 2rem;
+
+        &.active {
+          background: $primary-background-color;
+        }
+
+        .book-cover-img__container {
+          padding: 1rem;
+
+          .book-cover-img {
+            height: 250px;
+            margin: auto;
+            border: 5px solid $secondary-color;
+          }
+        }
+
+        .book-description__container {
+          height: 100px;
+          text-align: center;
+
+          .book-title {
+            font-size: 16px;
+          }
+
+          .book-author {
+            margin-bottom: 1rem;
+            display: block;
+            font-size: 16px;
+          }
+
+          .submit-btn {
+            visibility: hidden;
+            font-weight: 800;
+            color: $secondary-color;
+            border: none;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            transition: visibility 0s linear;
+
+            &.active {
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}

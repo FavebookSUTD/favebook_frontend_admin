@@ -10,6 +10,7 @@ import { compose } from 'redux';
 import { loadPrevPath, clearPrevPath } from '../../actions';
 
 // import page component
+import AddBookPage from '@pages/AddBookPage';
 import LogsPage from '@pages/LogsPage';
 import ClusterPage from '@pages/ClustersPage';
 import TFIDFPage from '@pages/TFIDFPage';
@@ -48,6 +49,12 @@ const Routers = ({ history, loadPrevPath, clearPrevPath }) => {
             path: '/',
             exact: true,
             component: LogsPage,
+            canActivate: [savePrevPath, shouldRoute],
+          },
+          {
+            path: '/add-book',
+            exact: true,
+            component: AddBookPage,
             canActivate: [savePrevPath, shouldRoute],
           },
           {

@@ -46,6 +46,10 @@ const SiderMenu = ({ path, siderOpenState, toggleSiderHandler }) => {
         selectedKeys={trim(path, '/') ? menuKeys : ['logs']}
         onClick={({ keyPath }) => goto(`/${join(reverse(keyPath), '/')}`)}
       >
+        <Menu.Item className="sider-menu-item" key="add-book">
+          <Icon className="menu-icon" type="book" />
+          <span>Add Books</span>
+        </Menu.Item>
         <Menu.Item className="sider-menu-item" key="logs">
           <Icon className="menu-icon" type="bars" />
           <span>Logs</span>
