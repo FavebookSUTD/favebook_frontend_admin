@@ -13,8 +13,8 @@ export function fetchTFIDF({ payload }) {
   const { searchValue, searchKey, pageNum, pageSize } = payload;
 
   const query = {
-    'pg-num': pageNum,
-    'pg-size': pageSize,
+    pageNum,
+    pageSize,
   };
 
   if (searchValue && searchKey) {
