@@ -65,10 +65,8 @@ class TFIDFPage extends PureComponent {
   ];
 
   componentDidMount() {
-    const { TFIDFJobStatus, fetchTFIDFJobStatus, resetSearchTFIDF } = this.props;
-    if (isEqual(TFIDFJobStatus, 'running')) {
-      fetchTFIDFJobStatus();
-    }
+    const { fetchTFIDFJobStatus, resetSearchTFIDF } = this.props;
+    fetchTFIDFJobStatus();
     resetSearchTFIDF();
   }
 

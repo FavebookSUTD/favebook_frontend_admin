@@ -47,10 +47,8 @@ class PearsonPage extends PureComponent {
   ];
 
   componentDidMount() {
-    const { pearsonJobStatus, fetchPearsonJobStatus } = this.props;
-    if (isEqual(pearsonJobStatus, 'running')) {
-      fetchPearsonJobStatus();
-    }
+    const { fetchPearsonJobStatus } = this.props;
+    fetchPearsonJobStatus();
   }
 
   componentDidUpdate(prevProps) {
