@@ -1,0 +1,35 @@
+@import '@themes/themeVariables.scss';
+
+.sider-menu__container {
+  background-image: linear-gradient(to bottom, $secondary-color, $primary-color);
+
+  .sider-menu {
+    margin-top: 1.5rem;
+    background: transparent;
+
+    .sider-menu-item {
+      font-family: sans-serif;
+      font-size: 18px;
+      .menu-icon {
+        font-size: 16px;
+      }
+    }
+
+    .ant-menu-item-selected {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .sider-submenu {
+      .ant-menu {
+        background: lighten($primary-color, 10%);
+        box-shadow: none;
+        .sider-menu-item {
+          margin: 0;
+        }
+      }
+      .ant-menu-item-selected {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}

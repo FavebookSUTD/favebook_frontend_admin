@@ -1,0 +1,60 @@
+@import '@themes/themeVariables.scss';
+
+$btn-radius: calc(45px / 2);
+
+.auth-form__container {
+  height: 100%;
+  padding: 1.5rem 1rem;
+
+  .form__container {
+    .ant-form-item-label {
+      margin-left: $btn-radius;
+      font-weight: 800;
+      line-height: 30px;
+    }
+
+    .ant-form-explain {
+      position: relative;
+      margin-left: $btn-radius;
+    }
+
+    .form-input {
+      .form-icon {
+        margin-left: 0.5rem;
+        font-size: 18px;
+        color: $primary-color;
+      }
+
+      .ant-input {
+        height: 45px;
+        padding-left: 3rem;
+        border-radius: $btn-radius;
+        border: solid 1px $secondary-border-color;
+        background: $form-background-color;
+        color: $primary-color;
+        font-weight: 300;
+        font-size: 16px;
+      }
+    }
+
+    .password-input {
+      .ant-input {
+        font-weight: 800;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .form-submit-btn {
+    height: 45px;
+    margin: 1rem 0;
+    background: $primary-color;
+    font-weight: 800;
+    border: none;
+
+    &:hover,
+    &:active {
+      background: lighten($primary-color, 10%);
+    }
+  }
+}
