@@ -3,7 +3,7 @@ import apiConfig from '@apis/apiConfig';
 
 export function fetchTFIDFJobStatus() {
   return api.get({
-    url: apiConfig.analytics.tfitf,
+    url: apiConfig.analytics.jobStatus,
     query: { job: 'tfidf' },
     needAuthenticate: true,
   });
