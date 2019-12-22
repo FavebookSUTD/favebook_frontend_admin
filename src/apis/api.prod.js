@@ -4,6 +4,7 @@ let sparkURL;
 if (process && process.env) {
   backendURL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
   sparkURL = process.env.REACT_APP_SPARK_URL || 'http://localhost:5000';
+  console.log(process.env.REACT_APP_SPARK_URL);
 }
 
 const config = {
@@ -17,13 +18,7 @@ const config = {
     history: `${backendURL}/books/add/history`,
     search: `${backendURL}/books/add/search`,
   },
-  analytics: {
-    jobStatus: `${sparkURL}/analytics/status`,
-    tfidf: `${sparkURL}/analytics/tfidf_result`,
-    pearson: `${sparkURL}/analytics/pearson_result`,
-    sparkJob: `${sparkURL}/analytics/start`,
-    clusterHealth: `${sparkURL}/analytics/cluster_health`,
-  },
+
 };
 
 export default config;
